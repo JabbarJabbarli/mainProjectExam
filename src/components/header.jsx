@@ -9,8 +9,8 @@ import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <header>
-      <div className="container border flex items-center justify-between py-5">
-        <div className="flex items-center lg:gap-8 xl:gap-24">
+      <div className="container  flex items-center justify-between py-5">
+        <div className="flex items-center gap-8 xl:gap-24">
           <Link to={"/"} className="flex items-center gap-6">
             <img src={logoMark} className="w-10 y-10" />
             <h1 className="text-neutral-900 font-extrabold text-[20px] ">
@@ -18,7 +18,7 @@ const Header = () => {
             </h1>
           </Link>
 
-          <nav className="hidden :text-sm md:flex items-center gap-14 ">
+          <nav className="hidden lg:flex lg:items-center gap-8">
             <Link className="text-md text-neutral-500 font-medium">Home</Link>
             <Link className="text-md text-neutral-500 font-medium">
               Categories
@@ -30,7 +30,7 @@ const Header = () => {
           </nav>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 md:gap-3">
           <div className="hidden md:flex items-center gap-2 border border-neutral-100 px-4 py-2 rounded-md">
             <img src={search} className="w-7 y-7 cursor-pointer" />
             <input
