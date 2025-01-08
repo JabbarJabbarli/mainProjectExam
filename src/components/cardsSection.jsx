@@ -13,32 +13,31 @@ const CardsSection = () => {
     },
     {
       img: starBadge,
-      title: "Free Shipping",
+      title: "Quality Assurance",
       subtitle:
-        "Upgrade your style today and get FREE shipping on all orders! Don't miss out.",
+        "We ensure the highest quality in all our products. Experience excellence.",
     },
     {
       img: shieldCheck,
-      title: "Free Shipping",
+      title: "Secure Payments",
       subtitle:
-        "Upgrade your style today and get FREE shipping on all orders! Don't miss out.",
+        "Your privacy is important to us. Enjoy secure and safe transactions.",
     },
   ];
 
   return (
     <section className="mt-24">
-      <div className="container grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 py-8 gap-16 ">
+      <div className="container grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 py-8 gap-16">
         {features.map((item, index) => (
-          <div key={index} className="flex flex-col items-start gap-2 ">
-            <div className="p-3 bg-neutral-50 rounded-full">
+          <div
+            key={index}
+            className="flex flex-col items-start sm:w-fit rounded-xl "
+          >
+            <div className="p-3  bg-neutral-50 rounded-full">
               <img src={item.img} alt={item.title} className="w-6 h-6" />
             </div>
-            <h2 className="mt-4 mb-2 text-xl font-semibold text-center">
-              {item.title}
-            </h2>
-            <p className="text-neutral-500 text-sm w-[300px] md:text-start text-center">
-              {item.subtitle}
-            </p>
+            <h2 className="mt-4 mb-2 text-xl font-semibold ">{item.title}</h2>
+            <p className="text-neutral-500 text-sm">{item.subtitle}</p>
           </div>
         ))}
       </div>

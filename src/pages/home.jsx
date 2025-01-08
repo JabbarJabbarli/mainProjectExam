@@ -33,6 +33,8 @@ const HomePage = () => {
         btnHref=""
         img={categoryImage}
       />
+
+      <BestSelling />
     </>
   );
 };
