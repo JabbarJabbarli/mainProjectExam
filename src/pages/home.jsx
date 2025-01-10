@@ -6,6 +6,12 @@ import CardsSection from "../components/cardsSection";
 import categoryImage from "../assets/global/Category Image.svg";
 import bodyImage from "../assets/global/Hero Image.svg";
 import BestSelling from "../components/bestSelling";
+import { cardsInfo } from "../data/cardsInfo";
+import FeaturedAndLatestBtn from "../components/outlet/featuredAndLatest";
+import { Outlet } from "react-router-dom";
+import { featured } from "../data/featured";
+import { latest } from "../data/latest";
+import NewsLetter from "../components/newsLetter";
 const HomePage = () => {
   return (
     <>
@@ -24,7 +30,7 @@ const HomePage = () => {
       />
       <CardsSection />
 
-      <BestSelling />
+      <BestSelling cardsInfo={cardsInfo} />
 
       <Hero
         title="Browse Our Fashion Paradise!"
@@ -34,7 +40,16 @@ const HomePage = () => {
         img={categoryImage}
       />
 
-      <BestSelling />
+      <section>
+        <FeaturedAndLatestBtn latest={latest} featured={featured} />
+        <Outlet />
+      </section>
+
+      <NewsLetter
+        title="Join Our Newsletter"
+        description="We love to surprise our subscribers with occasional gifts"
+        btnText="Subscribe"
+      />
     </>
   );
 };
