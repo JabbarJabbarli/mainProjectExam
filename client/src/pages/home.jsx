@@ -12,6 +12,8 @@ import { Outlet } from "react-router-dom";
 import { featured } from "../data/featured";
 import { latest } from "../data/latest";
 import NewsLetter from "../components/newsLetter";
+import Footer from "../components/footer";
+import { footerData, footerLinks, footerPayment } from "../data/footer";
 const HomePage = () => {
   return (
     <>
@@ -49,6 +51,11 @@ const HomePage = () => {
         title="Join Our Newsletter"
         description="We love to surprise our subscribers with occasional gifts"
         btnText="Subscribe"
+      />
+      <Footer
+        footerData={footerData}
+        footerLinks={footerLinks}
+        footerPayment={footerPayment}
       />
     </>
   );

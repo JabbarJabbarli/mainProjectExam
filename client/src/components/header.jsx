@@ -19,7 +19,13 @@ const Header = () => {
           </Link>
 
           <nav className="hidden xl:flex xl:items-center gap-8">
-            <Link className="text-md text-neutral-500 font-medium">Home</Link>
+            <Link to={"/"} className="text-md text-neutral-500 font-medium">Home</Link>
+            <Link
+              to={"/product"}
+              className="text-md text-neutral-500 font-medium"
+            >
+              Product
+            </Link>
             <Link className="text-md text-neutral-500 font-medium">
               Categories
             </Link>

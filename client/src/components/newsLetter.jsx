@@ -10,7 +10,7 @@ const NewsLetter = ({ title, description, btnText }) => {
         </div>
         <div className="flex sm:flex sm:flex-col lg:flex lg:flex-row ">
           <input
-            className="sm:text-base flex-1 md:text-lg bg-transparent px-5 py-2 rounded-sm"
+            className="sm:text-base flex-1 md:text-lg bg-transparent px-5 py-2 outline-none border border-neutral-100 rounded-md"
             placeholder="Your email address"
           />
           <button className="bg-neutral-900 xl:text-base lg:text-sm md:text-xs sm:text-sm text-xs text-white rounded-sm px-6 py-3  font-medium">

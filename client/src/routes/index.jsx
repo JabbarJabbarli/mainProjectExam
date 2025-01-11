@@ -4,6 +4,7 @@ import Latest from "../components/outlet/featuredAndLatest/latest";
 import Featured from "../components/outlet/featuredAndLatest/featured";
 import { latest } from "../data/latest";
 import { featured } from "../data/featured";
+import ProductPage from "../pages/product";
 
 export const routes = createBrowserRouter([
   {
@@ -12,7 +13,24 @@ export const routes = createBrowserRouter([
     children: [
       {
         index: true,
-        path: "featured",
+        path: "",
+        element: <Featured />,
+        loader: () => featured,
+      },
+      {
+        path: "latest",
+        element: <Latest />,
+        loader: () => latest,
+      },
+    ],
+  },
+  {
+    path: "/product",
+    element: <ProductPage />,
+    children: [
+      {
+        index: true,
+        path: "",
         element: <Featured />,
         loader: () => featured,
       },
