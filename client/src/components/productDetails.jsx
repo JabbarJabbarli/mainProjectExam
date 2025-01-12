@@ -15,7 +15,7 @@ const ProductDetails = ({ productDetail }) => {
             </div>
           </div>
 
-          <div className="flex flex-col w-[553px] gap-5">
+          <div className="flex flex-col w-[553px]  gap-5">
             <div className="flex items-center justify-between">
               <h2 className="text-neutral-900 text-[24px] tracking-wider font-bold">
                 {item.name}
@@ -28,7 +28,7 @@ const ProductDetails = ({ productDetail }) => {
                 <img src={item.starIcon} alt="Star" />
                 <p className="text-[#5c5f6a] text-center">{item.reviews}</p>
               </div>
-              <p className="px-3 py-1 rounded-full font-normal text-sm border border-neutral-100">
+              <p className="px-3 py-1 rounded-full font-normal text-sm border text-neutral-500 border-neutral-100">
                 {item.stock}
               </p>
             </div>
@@ -38,11 +38,11 @@ const ProductDetails = ({ productDetail }) => {
             <p className="text-[16px] mt-[8px] text-[#5c5f6a]">
               {item.colorTitle}
             </p>
-            <div className="flex gap-3">
+            <div className="flex transiton duration-150 gap-3">
               {item.colors.map((color) => (
                 <div
                   key={color.name}
-                  className={`p-1 cursor-pointer rounded-full border-[1px] ${
+                  className={`p-[4px] cursor-pointer rounded-full border-[1px] ${
                     selectedColor === color.name
                       ? "border-neutral-900"
                       : "border-transparent"
@@ -63,9 +63,9 @@ const ProductDetails = ({ productDetail }) => {
                 <div
                   key={size}
                   onClick={() => setSelectedSize(size)}
-                  className={` w-10 h-10 flex items-center justify-center transition duration-150 rounded-md cursor-pointer border ${
+                  className={` w-10 h-10 flex items-center justify-center text-[12px] transition duration-150 rounded-md cursor-pointer border ${
                     selectedSize === size
-                      ? "border-neutral-500 bg-neutral-100"
+                      ? "border-neutral-900 bg-neutral-50"
                       : "border-neutral-200"
                   }`}
                 >
