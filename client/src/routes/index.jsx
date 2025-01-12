@@ -5,6 +5,8 @@ import Featured from "../components/outlet/featuredAndLatest/featured";
 import { latest } from "../data/latest";
 import { featured } from "../data/featured";
 import ProductPage from "../pages/product";
+import Reviews from "../components/outlet/reviewsAndDetails/reviews";
+import Details from "../components/outlet/reviewsAndDetails/details";
 
 export const routes = createBrowserRouter([
   {
@@ -29,15 +31,12 @@ export const routes = createBrowserRouter([
     element: <ProductPage />,
     children: [
       {
-        index: true,
-        path: "",
-        element: <Featured />,
-        loader: () => featured,
+        path: "reviews",
+        element: <Reviews />,
       },
       {
-        path: "latest",
-        element: <Latest />,
-        loader: () => latest,
+        path: "details",
+        element: <Details />,
       },
     ],
   },

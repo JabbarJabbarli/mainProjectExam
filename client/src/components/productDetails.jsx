@@ -42,7 +42,7 @@ const ProductDetails = ({ productDetail }) => {
               {item.colors.map((color) => (
                 <div
                   key={color.name}
-                  className={`p-[4px] cursor-pointer rounded-full border-[1px] ${
+                  className={`p-[4px] transition duration-150 cursor-pointer rounded-full border-[1px] ${
                     selectedColor === color.name
                       ? "border-neutral-900"
                       : "border-transparent"
@@ -50,7 +50,7 @@ const ProductDetails = ({ productDetail }) => {
                   onClick={() => setSelectedColor(color.name)}
                 >
                   <div
-                    className="rounded-full w-7 h-7"
+                    className="rounded-full  w-7 h-7"
                     style={{ backgroundColor: color.hex }}
                   ></div>
                 </div>

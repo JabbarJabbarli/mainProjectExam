@@ -1,10 +1,8 @@
 import React from "react";
-import { useLoaderData } from "react-router-dom";
 
-const Featured = () => {
-  const featured = useLoaderData();
+const Featured = ({ featured }) => {
   return (
-    <section className="my-12">
+    <section className="my-5">
       <div className="container grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 py-16 gap-8 md:gap-16">
         {featured.map((item, index) => (
           <div className="flex flex-col justify-between" key={index}>
