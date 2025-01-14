@@ -7,6 +7,8 @@ import { featured } from "../data/featured";
 import ProductPage from "../pages/product";
 import Reviews from "../components/outlet/reviewsAndDetails/reviews";
 import Details from "../components/outlet/reviewsAndDetails/details";
+import { reviewsDetails } from "../data/reviewsDetail";
+import { details } from "../data/details";
 
 export const routes = createBrowserRouter([
   {
@@ -29,14 +31,17 @@ export const routes = createBrowserRouter([
   {
     path: "/product",
     element: <ProductPage />,
+    loader: () => featured,
     children: [
       {
         path: "reviews",
         element: <Reviews />,
+        loader: () => reviewsDetails,
       },
       {
         path: "details",
         element: <Details />,
+        loader: () => details,
       },
     ],
   },

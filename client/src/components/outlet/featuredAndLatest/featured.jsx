@@ -1,6 +1,9 @@
 import React from "react";
+import { useLoaderData } from "react-router-dom";
 
-const Featured = ({ featured }) => {
+const Featured = () => {
+  const featured = useLoaderData();
+
   return (
     <section className="my-5">
       <div className="container grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 py-16 gap-8 md:gap-16">

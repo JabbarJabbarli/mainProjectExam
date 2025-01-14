@@ -7,10 +7,9 @@ import Footer from "../components/footer";
 import ProductDetails from "../components/productDetails";
 import { productDetail } from "../data/productDetail";
 import ReviewsAndDetails from "../components/outlet/reviewsAndDetails";
-import Featured from "../components/outlet/featuredAndLatest/featured";
-import { featured } from "../data/featured";
 import ProductBestSelling from "../components/productBestSelling";
-
+import { reviewsDetails } from "../data/reviewsDetail";
+import { details } from "../data/details";
 const ProductPage = () => {
   return (
     <>
@@ -23,7 +22,7 @@ const ProductPage = () => {
 
       <ProductDetails productDetail={productDetail} />
 
-      <ReviewsAndDetails />
+      <ReviewsAndDetails reviewsDetails={reviewsDetails} details={details} />
 
       <ProductBestSelling />
 
