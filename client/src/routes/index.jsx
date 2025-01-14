@@ -9,6 +9,7 @@ import Reviews from "../components/outlet/reviewsAndDetails/reviews";
 import Details from "../components/outlet/reviewsAndDetails/details";
 import { reviewsDetails } from "../data/reviewsDetail";
 import { details } from "../data/details";
+import LisringPage from "../pages/listingPage";
 
 export const routes = createBrowserRouter([
   {
@@ -45,5 +46,9 @@ export const routes = createBrowserRouter([
         loader: () => details,
       },
     ],
+  },
+  {
+    path: "/listing",
+    element: <LisringPage />,
   },
 ]);
