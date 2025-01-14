@@ -10,7 +10,7 @@ const ProductDetails = ({ productDetail }) => {
       {productDetail.map((item, index) => (
         <div
           key={index}
-          className="container sm:flex sm:flex-col sm:gap-5 md:flex lg:flex-row lg:gap-28"
+          className="container sm:flex sm:flex-col sm:gap-5 md:flex lg:flex-row lg:gap-24"
         >
           <div>
             <div className="md:w-[553px] sm:w-[300px] sm:h-[300px] sm:flex sm:items-center sm:justify-center bg-[#f6f6f6] flex items-center justify-center md:h-[574px]">
@@ -24,7 +24,7 @@ const ProductDetails = ({ productDetail }) => {
 
           <div className="flex flex-col gap-[22px] w-full">
             <div className="flex items-center justify-between">
-              <h2 className="text-neutral-900 text-[24px] sm:text-[16px] md:text-[24px] tracking-wider font-bold">
+              <h2 className="text-neutral-900 text-[24px] sm:text-[16px] md:text-[28px] tracking-wider font-bold">
                 {item.name}
               </h2>
               <img alt="Share" src={item.shareIcon} className="w-7 h-7" />
@@ -80,10 +80,10 @@ const ProductDetails = ({ productDetail }) => {
                 <div
                   key={size}
                   onClick={() => setSelectedSize(size)}
-                  className={`sm:w-6 sm:h-6 md:w-10 md:h-10 flex items-center justify-center sm:text-[10px] md:text-[12px] transition duration-150 rounded-md cursor-pointer border ${
+                  className={`sm:w-6 sm:h-6 md:w-10 md:h-10 flex items-center justify-center sm:text-[10px] md:text-[13px] transition duration-150 rounded-sm cursor-pointer border  ${
                     selectedSize === size
                       ? "border-neutral-900 bg-neutral-50"
-                      : "border-neutral-200"
+                      : "border-slate-200"
                   }`}
                 >
                   {size}

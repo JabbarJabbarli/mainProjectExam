@@ -39,7 +39,8 @@ export const routes = createBrowserRouter([
         loader: () => reviewsDetails,
       },
       {
-        path: "details",
+        index: true,
+        path: "",
         element: <Details />,
         loader: () => details,
       },

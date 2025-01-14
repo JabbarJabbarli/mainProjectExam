@@ -7,10 +7,10 @@ const ReviewsAndDetails = () => {
   const [active, setActive] = useState("details");
   return (
     <section className="sm:my-10 md:my-44 w-full container">
-      <div className="flex sm:gap-10 md:gap-20 sm:flex sm:flex-col md:flex md:flex-row">
+      <div className="flex lg:flex-1 sm:gap-10 md:gap-20 sm:flex sm:flex-col md:flex md:flex-row">
         <div className="w-60 py-[70px] flex flex-col gap-5 shrink-0">
           <Link
-            to={`details`}
+            to={``}
             onClick={() => setActive("details")}
             className={`flex items-center gap-5 px-5 py-2 text-center rounded-md bg-transparent  ${
               active === "details" ? " bg-[#f1f1f1]" : "border-transparent"
