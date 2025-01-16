@@ -94,6 +94,7 @@ const ProductDetails = ({ productDetail }) => {
             <p className="sm:text-[10px] md:text-[16px] mt-[8px] text-[#5c5f6a]">
               QUANTITY
             </p>
+
             <div className="border sm:w-[100px] md:w-[164px] rounded-md flex items-center justify-between px-2 py-1 gap-3">
               <button
                 onClick={() =>
