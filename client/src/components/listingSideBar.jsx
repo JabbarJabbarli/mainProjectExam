@@ -60,49 +60,38 @@ const ListingSideBar = ({ productDetail }) => {
             <p className="text-neutral-700 text-base">Thermos</p>
           </div>
         </div>
-        {productDetail.map((item) => (
-          <div className="flex flex-col gap-5">
-            <h1 className="text-neutral-900 text-lg">Color</h1>
+        <div className="flex flex-col gap-5">
+          <h1 className="text-neutral-900 text-lg">Color</h1>
 
-            <div className="flex transition duration-150 gap-3">
-              {item.colors.map((color) => (
-                <div
-                  key={color.name}
-                  className={`p-[4px] transition duration-150 cursor-pointer rounded-full border-[1px] ${
-                    selectedColor === color.name
-                      ? "border-neutral-900"
-                      : "border-transparent"
-                  }`}
-                  onClick={() => setSelectedColor(color.name)}
-                >
-                  <div
-                    className="rounded-full sm:w-4 sm:h-4 md:w-7 md:h-7"
-                    style={{ backgroundColor: color.hex }}
-                  ></div>
-                </div>
-              ))}
-            </div>
-
-            <h1 className="sm:text-[10px] text-neutral-900 text-lg    md:text-[16px] mt-[8px] ">
-              Size
-            </h1>
-            <div className="flex items-center flex-wrap gap-5">
-              {["S", "M", "X", "XL", "XXL"].map((size) => (
-                <div
-                  key={size}
-                  onClick={() => setSelectedSize(size)}
-                  className={`sm:w-10 sm:h-10 md:w-[40px] md:h-[40px] flex items-center justify-center sm:text-[10px] md:text-[11px] transition duration-150 rounded-md cursor-pointer border  ${
-                    selectedSize === size
-                      ? "border-neutral-900 bg-neutral-50"
-                      : "border-neutral-100"
-                  }`}
-                >
-                  {size}
-                </div>
-              ))}
+          <div className="flex transition duration-150 gap-3">
+            <div
+              className={`p-[4px] transition duration-150 cursor-pointer rounded-full border-[1px]`}
+            >
+              <div
+                className="rounded-full sm:w-4 sm:h-4 md:w-7 md:h-7"
+              >ZxZ</div>
             </div>
           </div>
-        ))}
+
+          <h1 className="sm:text-[10px] text-neutral-900 text-lg    md:text-[16px] mt-[8px] ">
+            Size
+          </h1>
+          <div className="flex items-center flex-wrap gap-5">
+            {["S", "M", "X", "XL", "XXL"].map((size) => (
+              <div
+                key={size}
+                onClick={() => setSelectedSize(size)}
+                className={`sm:w-10 sm:h-10 md:w-[40px] md:h-[40px] flex items-center justify-center sm:text-[10px] md:text-[11px] transition duration-150 rounded-md cursor-pointer border  ${
+                  selectedSize === size
+                    ? "border-neutral-900 bg-neutral-50"
+                    : "border-neutral-100"
+                }`}
+              >
+                {size}
+              </div>
+            ))}
+          </div>
+        </div>
 
         <div class="relative w-full max-w-md">
           <div className=" max-w-md">

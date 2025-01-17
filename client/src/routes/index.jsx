@@ -9,7 +9,7 @@ import Reviews from "../components/outlet/reviewsAndDetails/reviews";
 import Details from "../components/outlet/reviewsAndDetails/details";
 import { reviewsDetails } from "../data/reviewsDetail";
 import { details } from "../data/details";
-import LisringPage from "../pages/listingPage";
+// import LisringPage from "../pages/listingPage";
 
 export const routes = createBrowserRouter([
   {
@@ -30,9 +30,8 @@ export const routes = createBrowserRouter([
     ],
   },
   {
-    path: "/product",
+    path: "/products/:documentId",
     element: <ProductPage />,
-    loader: () => featured,
     children: [
       {
         path: "reviews",
@@ -49,6 +48,6 @@ export const routes = createBrowserRouter([
   },
   {
     path: "/listing",
-    element: <LisringPage />,
+    // element: <LisringPage />,
   },
 ]);

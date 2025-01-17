@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import TopAds from "../components/topAds";
 import Header from "../components/header";
 import Hero from "../components/hero";
@@ -15,6 +15,22 @@ import NewsLetter from "../components/newsLetter";
 import Footer from "../components/footer";
 import { footerData, footerLinks, footerPayment } from "../data/footer";
 const HomePage = () => {
+  const [products, setProducts] = useState([]);
+  const getData = async () => {
+    try {
+      const res = await fetch("http://localhost:1337/api/products?populate=*");
+      const { data } = await res.json();
+      setProducts(data);
+      console.log(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <>
       <TopAds
@@ -32,7 +48,7 @@ const HomePage = () => {
       />
       <CardsSection />
 
-      <BestSelling cardsInfo={cardsInfo} />
+      <BestSelling products={products} />
 
       <Hero
         title="Browse Our Fashion Paradise!"
@@ -42,10 +58,8 @@ const HomePage = () => {
         img={categoryImage}
       />
 
-      <section>
-        <FeaturedAndLatestBtn latest={latest} featured={featured} />
-        <Outlet />
-      </section>
+      <FeaturedAndLatestBtn latest={latest} featured={featured} />
+      <Outlet />
 
       <NewsLetter
         title="Join Our Newsletter"

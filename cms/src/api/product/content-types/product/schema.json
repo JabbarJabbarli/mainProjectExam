@@ -1,0 +1,69 @@
+{
+  "kind": "collectionType",
+  "collectionName": "products",
+  "info": {
+    "singularName": "product",
+    "pluralName": "products",
+    "displayName": "Product",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "price": {
+      "type": "decimal"
+    },
+    "beforePrice": {
+      "type": "decimal"
+    },
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "genderFor": {
+      "type": "enumeration",
+      "enum": [
+        "men",
+        "women"
+      ]
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "hat",
+        "belt",
+        "trousers",
+        "shirt ",
+        "skirt",
+        "shoes"
+      ]
+    },
+    "info": {
+      "type": "json"
+    },
+    "sellCount": {
+      "type": "integer"
+    },
+    "review": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::review.review",
+      "inversedBy": "product_ids"
+    },
+    "detail": {
+      "type": "richtext"
+    }
+  }
+}
