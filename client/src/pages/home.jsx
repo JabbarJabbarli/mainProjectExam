@@ -6,7 +6,6 @@ import CardsSection from "../components/cardsSection";
 import categoryImage from "../assets/global/Category Image.svg";
 import bodyImage from "../assets/global/Hero Image.svg";
 import BestSelling from "../components/bestSelling";
-import { cardsInfo } from "../data/cardsInfo";
 import FeaturedAndLatestBtn from "../components/outlet/featuredAndLatest";
 import { Outlet } from "react-router-dom";
 import { featured } from "../data/featured";
@@ -14,22 +13,36 @@ import { latest } from "../data/latest";
 import NewsLetter from "../components/newsLetter";
 import Footer from "../components/footer";
 import { footerData, footerLinks, footerPayment } from "../data/footer";
-const HomePage = () => {
-  const [products, setProducts] = useState([]);
-  const getData = async () => {
-    try {
-      const res = await fetch("http://localhost:1337/api/products?populate=*");
-      const { data } = await res.json();
-      setProducts(data);
-      console.log(data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
+import { getData } from "../hooks/useFetch";
 
-  useEffect(() => {
-    getData();
-  }, []);
+const HomePage = () => {
+  const homePageQuery = `
+  {
+  products {
+    beforePrice
+    name
+    price
+    documentId
+    images {
+      url
+    }
+  }
+  features {
+    icon {
+      url
+    }
+    documentId
+    subtitle
+    title
+  }
+}`;
+
+  const { loading, error, data } = getData(homePageQuery);
+
+  if (loading) return <h1>loading</h1>;
+  if (error) return <h1>error</h1>;
+
+  const { products, features } = data;
 
   return (
     <>
@@ -46,7 +59,7 @@ const HomePage = () => {
         btnHref=""
         img={bodyImage}
       />
-      <CardsSection />
+      <CardsSection features={features} />
 
       <BestSelling products={products} />
 

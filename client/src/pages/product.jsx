@@ -10,29 +10,28 @@ import ProductBestSelling from "../components/productBestSelling";
 import { reviewsDetails } from "../data/reviewsDetail";
 import { details } from "../data/details";
 import { useParams } from "react-router-dom";
+import { getData } from "../hooks/useFetch";
 
 const ProductPage = () => {
   const { documentId } = useParams();
-  const [productDetail, setProductDetail] = useState([]);
+  const productPageQuery = `query($id: ID!){
+  product(documentId: $id){
+  name
+  price
+  documentId
+  beforePrice
+  }
+  }`;
 
-  const getProductDetail = async () => {
-    try {
-      const res = await fetch(
-        `http://localhost:1337/api/products/${documentId}?populate=*`
-      );
-      const { data } = await res.json();
+  const { loading, error, data } = getData(productPageQuery, {
+    id: documentId,
+  });
 
-      // If `data` is an object, convert it into an array
-      setProductDetail(Array.isArray(data) ? data : [data]);
-      console.log(data);
-    } catch (error) {
-      console.error("Error fetching product details:", error);
-    }
-  };
+  if (loading) return <h1>loading</h1>;
+  if (error) return <h1>error</h1>;
 
-  useEffect(() => {
-    getProductDetail();
-  }, []);
+  const { product } = data;
+  console.log(product);
 
   return (
     <>
@@ -43,7 +42,7 @@ const ProductPage = () => {
       />
       <Header />
 
-      <ProductDetails productDetail={productDetail} />
+      <ProductDetails product={product} />
 
       <ReviewsAndDetails reviewsDetails={reviewsDetails} details={details} />
 
