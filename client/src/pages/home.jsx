@@ -8,8 +8,6 @@ import bodyImage from "../assets/global/Hero Image.svg";
 import BestSelling from "../components/bestSelling";
 import FeaturedAndLatestBtn from "../components/outlet/featuredAndLatest";
 import { Outlet } from "react-router-dom";
-import { featured } from "../data/featured";
-import { latest } from "../data/latest";
 import NewsLetter from "../components/newsLetter";
 import Footer from "../components/footer";
 import { footerData, footerLinks, footerPayment } from "../data/footer";
@@ -71,7 +69,7 @@ const HomePage = () => {
         img={categoryImage}
       />
 
-      <FeaturedAndLatestBtn latest={latest} featured={featured} />
+      <FeaturedAndLatestBtn />
       <Outlet />
 
       <NewsLetter

@@ -1,37 +1,31 @@
 import React, { useState } from "react";
-import star from "../assets/global/Star.svg";
-import share from "../assets/global/Share.svg";
 
-const ProductDetails = ({ product = [] }) => {
+const ProductDetails = ({ product }) => {
   const [active, setActive] = useState();
   const [selectedSize, setSelectedSize] = useState(null);
+
   if (!product) {
     return <div>No product data available.</div>;
   }
 
-  const { images = [], name, price, info = [] } = product;
   return (
     <section className="my-24">
-      {product.map((item) => (
-        <div className="container sm:flex sm:flex-col sm:gap-5 md:flex lg:flex-row lg:gap-24">
-          <div className="sm:w-[400px] sm:h-[350px] sm:flex sm:items-center sm:justify-center md:w-[1000px] md:h-[550px] bg-[#f6f6f6] flex items-center justify-center ">
-            {images.length > 0 && (
-              <img
-                src={`http://localhost:1337${item.images[0].url}`}
-                alt={item.name}
-              />
-            )}
-          </div>
-          <div className="flex flex-col gap-[22px] w-full">
-            <h2 className="text-neutral-900 text-[24px] sm:text-[16px] md:text-[28px] tracking-wider font-bold">
-              {item.name}
-            </h2>
-            <h3 className="sm:text-[19px] md:text-[24px] font-semibold">
-              ${item.price}.00
-            </h3>
-          </div>
+      <div className="container sm:flex sm:flex-col sm:gap-5 md:flex lg:flex-row lg:gap-24">
+        <div className="sm:w-[400px] sm:h-[350px] sm:flex sm:items-center sm:justify-center md:w-[1000px] md:h-[550px] bg-[#f6f6f6] flex items-center justify-center">
+          <img
+            src={`http://localhost:1337${product.images[0].url}`}
+            alt={product.name}
+          />
         </div>
-      ))}
+        <div className="flex flex-col gap-[22px] w-full">
+          <h2 className="text-neutral-900 text-[24px] sm:text-[16px] md:text-[28px] tracking-wider font-bold">
+            {product.name}
+          </h2>
+          <h3 className="sm:text-[19px] md:text-[24px] font-semibold">
+            ${product.price}.00
+          </h3>
+        </div>
+      </div>
     </section>
   );
 };

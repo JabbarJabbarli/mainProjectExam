@@ -1,6 +1,5 @@
 import React from "react";
 import Featured from "./outlet/featuredAndLatest/featured";
-import { featured as featuredData } from "../data/featured";
 
 const ProductBestSelling = () => {
   return (
@@ -13,7 +12,7 @@ const ProductBestSelling = () => {
           SIMILAR PRODUCTS
         </p>
       </div>
-      <Featured featured={featuredData} />
+      <Featured />
     </section>
   );
 };

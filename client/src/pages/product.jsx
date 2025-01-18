@@ -14,14 +14,17 @@ import { getData } from "../hooks/useFetch";
 
 const ProductPage = () => {
   const { documentId } = useParams();
-  const productPageQuery = `query($id: ID!){
-  product(documentId: $id){
-  name
-  price
-  documentId
-  beforePrice
+  const productPageQuery = `query($id: ID!) {
+  product(documentId: $id) {
+    name
+    price
+    documentId
+    beforePrice
+    images {
+      url
+    }
   }
-  }`;
+}`;
 
   const { loading, error, data } = getData(productPageQuery, {
     id: documentId,
