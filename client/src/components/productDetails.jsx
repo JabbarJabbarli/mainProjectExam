@@ -1,29 +1,87 @@
 import React, { useState } from "react";
 
-const ProductDetails = ({ product }) => {
-  const [active, setActive] = useState();
+const ProductDetails = ({ product, colorTitle, sizeTitle }) => {
+  const [activeColorIndex, setActiveColorIndex] = useState(0);
   const [selectedSize, setSelectedSize] = useState(null);
 
   if (!product) {
     return <div>No product data available.</div>;
   }
 
+  // Get the sizes for the currently selected color
+  const currentColorSizes = product.info[activeColorIndex]?.size || [];
+
   return (
     <section className="my-24">
       <div className="container sm:flex sm:flex-col sm:gap-5 md:flex lg:flex-row lg:gap-24">
-        <div className="sm:w-[400px] sm:h-[350px] sm:flex sm:items-center sm:justify-center md:w-[1000px] md:h-[550px] bg-[#f6f6f6] flex items-center justify-center">
+        <div className="sm:w-[400px] sm:h-[350px] md:w-[1000px] md:h-[550px] flex flex-col items-center justify-center bg-[#f6f6f6] relative">
           <img
             src={`http://localhost:1337${product.images[0].url}`}
             alt={product.name}
           />
+          <div className="absolute bottom-7 left-1/2 -translate-x-1/2 flex items-center justify-center gap-3">
+            {product.images.map((item, index) => (
+              <button
+                key={index}
+                className={`w-[10px] h-[10px] bg-neutral-900 rounded-full`}
+              ></button>
+            ))}
+          </div>
         </div>
-        <div className="flex flex-col gap-[22px] w-full">
+
+        <div className="flex flex-col gap-[20px] w-full">
           <h2 className="text-neutral-900 text-[24px] sm:text-[16px] md:text-[28px] tracking-wider font-bold">
             {product.name}
           </h2>
+
+          <div>{product.beforePrice}</div>
+
           <h3 className="sm:text-[19px] md:text-[24px] font-semibold">
             ${product.price}.00
           </h3>
+
+          <h3 className="sm:text-[10px] md:text-[16px] mt-[8px] text-[#5c5f6a]">
+            {colorTitle}
+          </h3>
+
+          <div className="flex items-center gap-3">
+            {product.info.map((item, index) => (
+              <div
+                onClick={() => setActiveColorIndex(index)}
+                key={index}
+                className={`flex items-center justify-center ${
+                  activeColorIndex === index
+                    ? "p-[4px] border border-slate-900"
+                    : "p-[6px]"
+                } rounded-full`}
+              >
+                <div
+                  className="rounded-full sm:w-4 sm:h-4 md:w-8 md:h-8"
+                  style={{ background: item.color }}
+                ></div>
+              </div>
+            ))}
+          </div>
+
+          <h3 className="sm:text-[10px] md:text-[16px] mt-[8px] text-[#5c5f6a]">
+            {sizeTitle}
+          </h3>
+
+          <div className="flex flex-wrap gap-3">
+            {currentColorSizes.map((size, index) => (
+              <button
+                key={index}
+                onClick={() => setSelectedSize(size.name)}
+                className={`px-4 py-2 border rounded-md ${
+                  selectedSize === size.name
+                    ? "border-slate-900 bg-slate-900 text-white"
+                    : "border-slate-300 hover:border-slate-900"
+                }`}
+              >
+                {size.name} ({size.count})
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -31,7 +89,6 @@ const ProductDetails = ({ product }) => {
 };
 
 export default ProductDetails;
-
 {
   /* <div className="flex flex-col gap-[22px] w-full">
             <div className="flex items-center justify-between">

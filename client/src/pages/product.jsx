@@ -16,8 +16,9 @@ const ProductPage = () => {
   const { documentId } = useParams();
   const productPageQuery = `query($id: ID!) {
   product(documentId: $id) {
-    name
+     name
     price
+    info 
     documentId
     beforePrice
     images {
@@ -45,7 +46,11 @@ const ProductPage = () => {
       />
       <Header />
 
-      <ProductDetails product={product} />
+      <ProductDetails
+        product={product}
+        colorTitle={"AVAILABLE COLORS"}
+        sizeTitle={"SELECT SIZE"}
+      />
 
       <ReviewsAndDetails reviewsDetails={reviewsDetails} details={details} />
 
