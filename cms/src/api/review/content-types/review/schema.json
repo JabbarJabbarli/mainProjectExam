@@ -4,7 +4,7 @@
   "info": {
     "singularName": "review",
     "pluralName": "reviews",
-    "displayName": "Review",
+    "displayName": "Reviews",
     "description": ""
   },
   "options": {
@@ -26,11 +26,11 @@
       "min": 1,
       "required": true
     },
-    "product_ids": {
+    "product_id": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToOne",
       "target": "api::product.product",
-      "mappedBy": "review"
+      "inversedBy": "reviews"
     }
   }
 }

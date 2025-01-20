@@ -56,14 +56,17 @@
     "sellCount": {
       "type": "integer"
     },
-    "review": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::review.review",
-      "inversedBy": "product_ids"
-    },
     "detail": {
       "type": "richtext"
+    },
+    "star": {
+      "type": "integer"
+    },
+    "reviews": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::review.review",
+      "mappedBy": "product_id"
     }
   }
 }

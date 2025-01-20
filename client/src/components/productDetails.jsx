@@ -1,46 +1,64 @@
 import React, { useState } from "react";
+import star from "../assets/global/Star.svg";
+import heart from "../assets/global/Heart.svg";
 
 const ProductDetails = ({ product, colorTitle, sizeTitle }) => {
   const [activeColorIndex, setActiveColorIndex] = useState(0);
   const [selectedSize, setSelectedSize] = useState(null);
+  const [imgCounter, setImgCounter] = useState(0);
+  const [count, setCount] = useState(0);
+  const currentColorSizes = product.info[activeColorIndex]?.size || [];
 
   if (!product) {
     return <div>No product data available.</div>;
   }
 
-  // Get the sizes for the currently selected color
-  const currentColorSizes = product.info[activeColorIndex]?.size || [];
+  let sumOfStars = product.reviews.reduce((acc, review) => {
+    return acc + review.stars;
+  }, 0);
+
+  let reviewStarsMiddle = (sumOfStars / product.reviews.length).toFixed(1);
+
+  console.log(reviewStarsMiddle);
 
   return (
     <section className="my-24">
       <div className="container sm:flex sm:flex-col sm:gap-5 md:flex lg:flex-row lg:gap-24">
         <div className="sm:w-[400px] sm:h-[350px] md:w-[1000px] md:h-[550px] flex flex-col items-center justify-center bg-[#f6f6f6] relative">
           <img
-            src={`http://localhost:1337${product.images[0].url}`}
+            src={`http://localhost:1337${product.images[imgCounter].url}`}
             alt={product.name}
           />
           <div className="absolute bottom-7 left-1/2 -translate-x-1/2 flex items-center justify-center gap-3">
             {product.images.map((item, index) => (
               <button
                 key={index}
-                className={`w-[10px] h-[10px] bg-neutral-900 rounded-full`}
+                onClick={() => setImgCounter(index)}
+                className={`w-[10px] h-[10px] rounded-full ${
+                  index == imgCounter ? "bg-neutral-900" : "bg-slate-500"
+                }`}
               ></button>
             ))}
           </div>
         </div>
 
-        <div className="flex flex-col gap-[20px] w-full">
+        <div className="flex flex-col gap-[13px] w-full">
           <h2 className="text-neutral-900 text-[24px] sm:text-[16px] md:text-[28px] tracking-wider font-bold">
             {product.name}
           </h2>
 
-          <div>{product.beforePrice}</div>
+          <div className="flex items-center bg-neutral-100 w-fit px-4 py-[2px]  rounded-full gap-2 item-center mb-6">
+            <img src={star} />
+            <p className="  text-neutral-500 flex items-center gap-2">
+              {reviewStarsMiddle} - {product.reviews.length} Reviews
+            </p>
+          </div>
 
-          <h3 className="sm:text-[19px] md:text-[24px] font-semibold">
+          <h3 className="sm:text-[13px] md:text-[24px] font-semibold">
             ${product.price}.00
           </h3>
 
-          <h3 className="sm:text-[10px] md:text-[16px] mt-[8px] text-[#5c5f6a]">
+          <h3 className="sm:text-[10px] md:text-[13px] mt-[8px] text-[#5c5f6a]">
             {colorTitle}
           </h3>
 
@@ -49,38 +67,56 @@ const ProductDetails = ({ product, colorTitle, sizeTitle }) => {
               <div
                 onClick={() => setActiveColorIndex(index)}
                 key={index}
-                className={`flex items-center justify-center ${
+                className={`flex bg-transparent transition duration-150 cursor-pointer items-center justify-center ${
                   activeColorIndex === index
                     ? "p-[4px] border border-slate-900"
                     : "p-[6px]"
                 } rounded-full`}
               >
+                {console.log(index)}
                 <div
-                  className="rounded-full sm:w-4 sm:h-4 md:w-8 md:h-8"
-                  style={{ background: item.color }}
+                  className={`rounded-full  bg-[${item.color}] sm:w-4 sm:h-4 md:w-8 md:h-8`}
+                  style={{ background: item.color || "bg-black" }}
                 ></div>
               </div>
             ))}
           </div>
 
-          <h3 className="sm:text-[10px] md:text-[16px] mt-[8px] text-[#5c5f6a]">
+          <h3 className="sm:text-[10px] md:text-[13px] mt-[8px] text-[#5c5f6a]">
             {sizeTitle}
           </h3>
 
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-3 ">
             {currentColorSizes.map((size, index) => (
               <button
                 key={index}
                 onClick={() => setSelectedSize(size.name)}
-                className={`px-4 py-2 border rounded-md ${
+                className={`px-4 w-12 h-12 text-sm transition duration-150 flex items-center justify-center py-2 border rounded-md ${
                   selectedSize === size.name
                     ? "border-slate-900 bg-slate-900 text-white"
                     : "border-slate-300 hover:border-slate-900"
                 }`}
               >
-                {size.name} ({size.count})
+                {size.name}
               </button>
             ))}
+          </div>
+
+          <h3 className="sm:text-[10px] md:text-[13px] mt-[8px] text-[#5c5f6a]">
+            QUANTITY
+          </h3>
+          <div className="flex items-center justify-between border w-[164px] rounded-[5px] px-5 py-3">
+            <button onClick={() => setCount(count - 1)}>-</button>
+            <p>{count}</p>
+            <button onClick={() => setCount(count + 1)}>+</button>
+          </div>
+          <div className="flex items-center gap-5">
+            <button className="bg-neutral-900 w-[284px] rounded-md text-white px-25 py-3  ">
+              <p>Add to cart</p>
+            </button>
+            <div className="border w-[50px] rounded-md h-[50px] flex items-center justify-center">
+              <img src={heart} className="w-[30px] h-[30px]" />
+            </div>
           </div>
         </div>
       </div>

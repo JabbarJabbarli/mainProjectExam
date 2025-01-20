@@ -16,16 +16,29 @@ const ProductPage = () => {
   const { documentId } = useParams();
   const productPageQuery = `query($id: ID!) {
   product(documentId: $id) {
-     name
     price
-    info 
-    documentId
-    beforePrice
+    name
+    info
     images {
       url
     }
+    documentId
+    genderFor
+    detail
+    createdAt
+    category
+    beforePrice
+    star
+    reviews {
+      stars
+      publishedAt
+      documentId
+      description
+      author
+    }
   }
-}`;
+}
+`;
 
   const { loading, error, data } = getData(productPageQuery, {
     id: documentId,

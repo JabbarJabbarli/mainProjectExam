@@ -437,8 +437,9 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     name: Schema.Attribute.String;
     price: Schema.Attribute.Decimal;
     publishedAt: Schema.Attribute.DateTime;
-    review: Schema.Attribute.Relation<'manyToOne', 'api::review.review'>;
+    reviews: Schema.Attribute.Relation<'oneToMany', 'api::review.review'>;
     sellCount: Schema.Attribute.Integer;
+    star: Schema.Attribute.Integer;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -449,7 +450,7 @@ export interface ApiReviewReview extends Struct.CollectionTypeSchema {
   collectionName: 'reviews';
   info: {
     description: '';
-    displayName: 'Review';
+    displayName: 'Reviews';
     pluralName: 'reviews';
     singularName: 'review';
   };
@@ -468,7 +469,7 @@ export interface ApiReviewReview extends Struct.CollectionTypeSchema {
       'api::review.review'
     > &
       Schema.Attribute.Private;
-    product_ids: Schema.Attribute.Relation<'oneToMany', 'api::product.product'>;
+    product_id: Schema.Attribute.Relation<'manyToOne', 'api::product.product'>;
     publishedAt: Schema.Attribute.DateTime;
     stars: Schema.Attribute.Integer &
       Schema.Attribute.Required &
