@@ -5,8 +5,16 @@ import user from "../assets/global/User-1.svg";
 import cart from "../assets/global/Cart.svg";
 import search from "../assets/global/Search.svg";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
+  const { i18n, t } = useTranslation();
+
+  const handleChangeLanguage = (lang) => {
+    i18n.changeLanguage(lang);
+    localStorage.setItem("lang", lang);
+  };
+
   return (
     <header className="">
       <div className="container flex items-center justify-between py-5">
@@ -20,7 +28,7 @@ const Header = () => {
 
           <nav className="hidden xl:flex xl:items-center gap-8">
             <Link to={"/"} className="text-md text-neutral-500 font-medium">
-              Home
+              {t("text")}
             </Link>
             <Link
               to={"/product"}
@@ -64,6 +72,14 @@ const Header = () => {
             src={menu}
             className="lg:w-8 lg:h-8 md:w-7 md:h-7 sm:w-6 sm:h-6 xs:w-5 xs:h-5 cursor-pointer lg:hidden"
           />
+
+          <select
+            value={i18n.language}
+            onChange={(e) => handleChangeLanguage(e.target.value)}
+          >
+            <option value="en">EN</option>
+            <option value="az">AZ</option>
+          </select>
         </div>
       </div>
     </header>

@@ -5,45 +5,45 @@ import Featured from "../components/outlet/featuredAndLatest/featured";
 import ProductPage from "../pages/product";
 import Reviews from "../components/outlet/reviewsAndDetails/reviews";
 import Details from "../components/outlet/reviewsAndDetails/details";
-import { reviewsDetails } from "../data/reviewsDetail";
-import { details } from "../data/details";
-// import LisringPage from "../pages/listingPage";
+import MainLayOut from "../layout/mainLayOut";
 
 export const routes = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />,
+    element: <MainLayOut />,
     children: [
       {
-        index: true,
-        path: "",
-        element: <Featured />,
+        path: "/",
+        element: <HomePage />,
+        children: [
+          {
+            index: true,
+            element: <Featured />,
+          },
+          {
+            path: "latest",
+            element: <Latest />,
+          },
+        ],
       },
       {
-        path: "latest",
-        element: <Latest />,
+        path: "products/:documentId",
+        element: <ProductPage />,
+        children: [
+          {
+            path: "reviews",
+            element: <Reviews />,
+          },
+          {
+            index: true,
+            element: <Details />,
+          },
+        ],
+      },
+      {
+        path: "listing",
+        // element: <LisringPage />,
       },
     ],
-  },
-  {
-    path: "/products/:documentId",
-    element: <ProductPage />,
-    children: [
-      {
-        path: "reviews",
-        element: <Reviews />,
-        loader: () => reviewsDetails,
-      },
-      {
-        index: true,
-        path: "",
-        element: <Details />,
-        loader: () => details,
-      },
-    ],
-  },
-  {
-    path: "/listing",
-    // element: <LisringPage />,
   },
 ]);

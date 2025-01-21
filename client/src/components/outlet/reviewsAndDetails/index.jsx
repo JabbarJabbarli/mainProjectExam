@@ -3,7 +3,7 @@ import { Link, Outlet } from "react-router-dom";
 import emptyStar from "../../../assets/global/Empty Star.svg";
 import more from "../../../assets/global/More.svg";
 
-const ReviewsAndDetails = () => {
+const ReviewsAndDetails = ({ product }) => {
   const [active, setActive] = useState("details");
   return (
     <section className="sm:my-10 md:my-44 w-full container">
@@ -31,7 +31,12 @@ const ReviewsAndDetails = () => {
           </Link>
         </div>
         <div className="flex-1 min-w-0">
-          <Outlet />
+          <Outlet
+            context={{
+              reviews: product.reviews,
+              detail: product.detail,
+            }}
+          />
         </div>
       </div>
     </section>
