@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Hero from "../components/hero";
 import CardsSection from "../components/cardsSection";
 import categoryImage from "../assets/global/Category Image.svg";
@@ -11,27 +11,25 @@ import Error from "../components/loading/error";
 import Loading from "../components/loading/loading";
 
 const HomePage = () => {
-  const homePageQuery = `
-  {
-  products {
-    beforePrice
-    name
-    price
+  const homePageQuery = `{
+    products {
+    detail
     documentId
     images {
       url
     }
+    name
+    price
   }
+   
   features {
-    icon {
+    title
+    subtitle
+    reviewIcon {
       url
     }
-    documentId
-    subtitle
-    title
   }
-}`;
-
+  }`;
   const { loading, error, data } = getData(homePageQuery);
 
   if (loading) return <Loading />;

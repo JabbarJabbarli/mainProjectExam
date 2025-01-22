@@ -1,20 +1,21 @@
+// i18n.js
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import az from "../locales/az.json";
-import en from "../locales/en.json";
 
 const resources = {
-  az: {
-    translation: az,
-  },
-  en: {
-    translation: en,
-  },
+  en: {},
+  az: {},
 };
 
 i18n.use(initReactI18next).init({
-  lng: localStorage.getItem("lang") || "az",
   resources,
+  lng: localStorage.getItem("language") || "en",
+  interpolation: {
+    escapeValue: false,
+  },
+  react: {
+    useSuspense: false,
+  },
 });
 
 export default i18n;

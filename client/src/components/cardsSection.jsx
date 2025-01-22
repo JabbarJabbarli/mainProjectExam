@@ -11,7 +11,7 @@ const CardsSection = ({ features }) => {
           >
             <div className="p-3  bg-neutral-50 rounded-full">
               <img
-                src={`http://localhost:1337${item.icon[0].url}`}
+                src={`http://localhost:1337${item.reviewIcon.url}`}
                 className="w-6 h-6"
               />
             </div>

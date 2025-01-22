@@ -1,10 +1,10 @@
 {
-  "kind": "collectionType",
-  "collectionName": "features",
+  "kind": "singleType",
+  "collectionName": "email_sections",
   "info": {
-    "singularName": "feature",
-    "pluralName": "features",
-    "displayName": "Feature"
+    "singularName": "email-section",
+    "pluralName": "email-sections",
+    "displayName": "EmailSection"
   },
   "options": {
     "draftAndPublish": true
@@ -33,20 +33,22 @@
       "type": "string",
       "required": true
     },
-    "reviewIcon": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
-      "type": "media",
-      "multiple": false,
+    "btnText": {
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
+      "type": "string",
+      "required": true
+    },
+    "inputPlaceholder": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string",
       "required": true
     }
   }

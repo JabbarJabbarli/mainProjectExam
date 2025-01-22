@@ -9,11 +9,11 @@ const BestSelling = ({ products }) => {
         Best Selling
       </h2>
       <div className="container grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 py-16 gap-8 md:gap-16">
-        {products.map((item, index) => (
+        {products.map((item) => (
           <Link
             to={`/products/${item.documentId}`}
             className="flex flex-col justify-between"
-            key={index}
+            key={item.documentId} // Use a unique key
           >
             <img
               className="w-full h-auto"
