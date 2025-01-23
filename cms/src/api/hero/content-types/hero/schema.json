@@ -1,10 +1,10 @@
 {
-  "kind": "singleType",
-  "collectionName": "email_sections",
+  "kind": "collectionType",
+  "collectionName": "heroes",
   "info": {
-    "singularName": "email-section",
-    "pluralName": "email-sections",
-    "displayName": "EmailSection"
+    "singularName": "hero",
+    "pluralName": "heroes",
+    "displayName": "Hero"
   },
   "options": {
     "draftAndPublish": true
@@ -21,8 +21,7 @@
           "localized": true
         }
       },
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "subtitle": {
       "pluginOptions": {
@@ -30,8 +29,7 @@
           "localized": true
         }
       },
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "btnText": {
       "pluginOptions": {
@@ -39,17 +37,7 @@
           "localized": true
         }
       },
-      "type": "string",
-      "required": true
-    },
-    "inputPlaceholder": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "type": "string",
-      "required": true
+      "type": "string"
     }
   }
 }

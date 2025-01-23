@@ -9,10 +9,13 @@ import { Outlet } from "react-router-dom";
 import { getData } from "../hooks/useFetch";
 import Error from "../components/loading/error";
 import Loading from "../components/loading/loading";
+import { useTranslation } from "react-i18next";
+import FashionParadise from "../components/fashionParadise";
 
 const HomePage = () => {
+  const { i18n } = useTranslation();
   const homePageQuery = `{
-    products {
+    products(locale:"${i18n.language}") {
     detail
     documentId
     images {
@@ -21,14 +24,18 @@ const HomePage = () => {
     name
     price
   }
-   
-  features {
+  features(locale:"${i18n.language}") {
     title
     subtitle
     reviewIcon {
       url
     }
   }
+   heroes(locale:"${i18n.language}"){
+    btnText
+    title
+    subtitle
+    }
   }`;
   const { loading, error, data } = getData(homePageQuery);
 
@@ -36,28 +43,16 @@ const HomePage = () => {
   {
     if (data.product) return <Error />;
 
-    const { products, features } = data;
+    const { products, features, heroes } = data;
 
     return (
       <>
-        <Hero
-          title="Fresh Arrivals Online"
-          subtitle="Discover Our Newest Collection Today."
-          btnText="View Collection"
-          btnHref=""
-          img={bodyImage}
-        />
+        <Hero heroes={heroes[0]} img={bodyImage} />
         <CardsSection features={features} />
 
         <BestSelling products={products} />
 
-        <Hero
-          title="Browse Our Fashion Paradise!"
-          subtitle="Step into a world of style and explore our diverse collection of clothing categories."
-          btnText="Start Browsing"
-          btnHref=""
-          img={categoryImage}
-        />
+        <FashionParadise heroes={heroes[1]} img={categoryImage} />
 
         <FeaturedAndLatestBtn />
         <Outlet />

@@ -5,7 +5,6 @@ import Header from "../components/header";
 import { Outlet } from "react-router-dom";
 import Footer from "../components/footer";
 import NewsLetter from "../components/newsLetter";
-import { footerData, footerLinks, footerPayment } from "../data/footer";
 import { getData } from "../hooks/useFetch";
 import Loading from "../components/loading/loading";
 import Error from "../components/loading/error";
@@ -40,13 +39,30 @@ const MainLayout = () => {
       menuIcon{
         url
       }
+
     }
-       emailSection(locale:"${i18n.language}") {
-        btnText
-        title
-        subtitle
-        inputPlaceholder
+      
+    footerLink(locale:"${i18n.language}") {
+    description
+    logoText
+    logoImg {
+      url
+    }
+    links
+    paymentTitle
+    paymentImages{
+      url
+    }
+    socialMediaLinks
+    socialMediaImages{
+    url
+    }
   }
+    heroes(locale:"${i18n.language}"){
+    btnText
+    title
+    subtitle
+    }
   }`;
 
   useEffect(() => {
@@ -73,12 +89,8 @@ const MainLayout = () => {
         />
         <Header data={data?.header} />
         <Outlet />
-        <NewsLetter emailSection={data?.emailSection} />
-        <Footer
-          footerData={footerData}
-          footerLinks={footerLinks}
-          footerPayment={footerPayment}
-        />
+        <NewsLetter heroes={data?.heroes[2]} />
+        <Footer footerLink={data?.footerLink} />
       </div>
     );
   }
