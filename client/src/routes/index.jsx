@@ -31,11 +31,11 @@ export const routes = createBrowserRouter([
         element: <ProductPage />,
         children: [
           {
-            path: "reviews",
+            index: true,
             element: <Reviews />,
           },
           {
-            index: true,
+            path: "details",
             element: <Details />,
           },
         ],

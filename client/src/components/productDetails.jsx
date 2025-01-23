@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import star from "../assets/global/Star.svg";
 import heart from "../assets/global/Heart.svg";
+import ShareButton from "./handleShare";
+import { useParams } from "react-router-dom";
 
 const ProductDetails = ({ product, colorTitle, sizeTitle }) => {
   const [activeColorIndex, setActiveColorIndex] = useState(0);
   const [selectedSize, setSelectedSize] = useState(null);
   const [imgCounter, setImgCounter] = useState(0);
+  const [isFavorite, setIsFavorite] = useState(false);
   const [count, setCount] = useState(0);
   const currentColorSizes = product.info[activeColorIndex]?.size || [];
-
+  const { documentId } = useParams();
   if (!product) {
     return <div>No product data available.</div>;
   }
@@ -19,8 +22,32 @@ const ProductDetails = ({ product, colorTitle, sizeTitle }) => {
 
   let reviewStarsMiddle = (sumOfStars / product.reviews.length).toFixed(1);
 
-  console.log(reviewStarsMiddle);
+  const selectedSizeIndex = selectedSize
+    ? currentColorSizes.findIndex((size) => size.name === selectedSize)
+    : null;
 
+  const sizeCount =
+    selectedSizeIndex !== null ? currentColorSizes[selectedSizeIndex].count : 0;
+
+  const decrementCount = () => {
+    if (count > 0) {
+      setCount(count - 1);
+    }
+  };
+
+  const incrementCount = () => {
+    if (sizeCount > count) {
+      setCount(count + 1);
+    }
+  };
+
+  const toggleIsFavorite = (documentId) => {
+    const favoritesString = localStorage.getItem("favorites");
+    const favoritesArr = JSON.parse(favoritesString);
+    favoritesArr.push(documentId);
+    localStorage.setItem("favorites", JSON.stringify(favoritesArr));
+    alert(`Item id: ${documentId}`);
+  };
   return (
     <section className="my-24">
       <div className="container sm:flex sm:flex-col sm:gap-5 md:flex lg:flex-row lg:gap-24">
@@ -43,13 +70,15 @@ const ProductDetails = ({ product, colorTitle, sizeTitle }) => {
         </div>
 
         <div className="flex flex-col gap-[13px] w-full">
-          <h2 className="text-neutral-900 text-[24px] sm:text-[16px] md:text-[28px] tracking-wider font-bold">
-            {product.name}
-          </h2>
-
+          <div className="flex items-center justify-between">
+            <h2 className="text-neutral-900 text-[24px] sm:text-[16px] md:text-[28px] tracking-wider font-bold">
+              {product.name}
+            </h2>
+            <ShareButton />
+          </div>
           <div className="flex items-center bg-neutral-100 w-fit px-4 py-[2px]  rounded-full gap-2 item-center mb-6">
             <img src={star} />
-            <p className="  text-neutral-500 flex items-center gap-2">
+            <p className="text-neutral-500 flex items-center gap-2">
               {reviewStarsMiddle} - {product.reviews.length} Reviews
             </p>
           </div>
@@ -65,7 +94,11 @@ const ProductDetails = ({ product, colorTitle, sizeTitle }) => {
           <div className="flex items-center gap-3">
             {product.info.map((item, index) => (
               <div
-                onClick={() => setActiveColorIndex(index)}
+                onClick={() => {
+                  setActiveColorIndex(index);
+                  setSelectedSize(null);
+                  setCount(0);
+                }}
                 key={index}
                 className={`flex bg-transparent transition duration-150 cursor-pointer items-center justify-center ${
                   activeColorIndex === index
@@ -73,9 +106,8 @@ const ProductDetails = ({ product, colorTitle, sizeTitle }) => {
                     : "p-[6px]"
                 } rounded-full`}
               >
-                {console.log(activeColorIndex)}
                 <div
-                  className={`rounded-full  bg-[${item.color}] sm:w-4 sm:h-4 md:w-8 md:h-8`}
+                  className={`rounded-full bg-[${item.color}] sm:w-4 sm:h-4 md:w-8 md:h-8`}
                   style={{ background: item.color || "bg-black" }}
                 ></div>
               </div>
@@ -90,10 +122,16 @@ const ProductDetails = ({ product, colorTitle, sizeTitle }) => {
             {currentColorSizes.map((size, index) => (
               <button
                 key={index}
-                onClick={() => setSelectedSize(size.name)}
+                onClick={() => {
+                  setSelectedSize(size.name);
+                  setCount(0);
+                }}
+                disabled={size.count === 0}
                 className={`px-4 w-12 h-12 text-sm transition duration-150 flex items-center justify-center py-2 border rounded-md ${
                   selectedSize === size.name
                     ? "border-slate-900 bg-slate-900 text-white"
+                    : size.count === 0
+                    ? "opacity-50 cursor-not-allowed"
                     : "border-slate-300 hover:border-slate-900"
                 }`}
               >
@@ -102,24 +140,44 @@ const ProductDetails = ({ product, colorTitle, sizeTitle }) => {
             ))}
           </div>
 
+          <p className="text-sm text-gray-500">
+            {selectedSize ? `Available stock: ${sizeCount}` : "Select a size"}
+          </p>
+
           <h3 className="sm:text-[10px] md:text-[13px] mt-[8px] text-[#5c5f6a]">
             QUANTITY
           </h3>
           <div className="flex items-center justify-between border w-[164px] rounded-[5px] px-5 py-3">
-            <button onClick={() => {}}>-</button>
-            <p>
-              {/* {product.info[activeColorIndex].size[currentColorSizes].count} */}
-            </p>
-            <button onClick={() => setCount(count + 1)}>+</button>
+            <button
+              onClick={decrementCount}
+              disabled={count === 0}
+              className="disabled:opacity-50"
+            >
+              -
+            </button>
+            <p>{count}</p>
+            <button
+              onClick={incrementCount}
+              disabled={count >= sizeCount}
+              className="disabled:opacity-50"
+            >
+              +
+            </button>
           </div>
 
           <div className="flex items-center gap-5">
-            <button className="bg-neutral-900 w-[284px] rounded-md text-white px-25 py-3  ">
+            <button
+              className="bg-neutral-900 w-[284px] rounded-md text-white px-25 py-3"
+              disabled={!selectedSize || count === 0}
+            >
               <p>Add to cart</p>
             </button>
-            <div className="border w-[50px] rounded-md h-[50px] flex items-center justify-center">
+            <button
+              onClick={() => toggleIsFavorite(product.documentId)}
+              className="border w-[50px] rounded-md h-[50px] flex items-center justify-center"
+            >
               <img src={heart} className="w-[30px] h-[30px]" />
-            </div>
+            </button>
           </div>
         </div>
       </div>
