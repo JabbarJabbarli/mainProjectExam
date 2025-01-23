@@ -3,15 +3,19 @@ import star from "../assets/global/Star.svg";
 import heart from "../assets/global/Heart.svg";
 import ShareButton from "./handleShare";
 import { useParams } from "react-router-dom";
-
+import { FaHeart } from "react-icons/fa";
+import { FaRegHeart } from "react-icons/fa";
 const ProductDetails = ({ product, colorTitle, sizeTitle }) => {
-  const [activeColorIndex, setActiveColorIndex] = useState(0);
-  const [selectedSize, setSelectedSize] = useState(null);
-  const [imgCounter, setImgCounter] = useState(0);
-  const [isFavorite, setIsFavorite] = useState(false);
-  const [count, setCount] = useState(0);
-  const currentColorSizes = product.info[activeColorIndex]?.size || [];
   const { documentId } = useParams();
+  const [count, setCount] = useState(0);
+  const [imgCounter, setImgCounter] = useState(0);
+  const [selectedSize, setSelectedSize] = useState(null);
+  const [activeColorIndex, setActiveColorIndex] = useState(0);
+  const currentColorSizes = product.info[activeColorIndex]?.size || [];
+  const currentFavorite = JSON.parse(
+    localStorage.getItem("favorites").includes(product?.documentId)
+  );
+  const [favorite, setFavorite] = useState(currentFavorite);
   if (!product) {
     return <div>No product data available.</div>;
   }
@@ -44,10 +48,18 @@ const ProductDetails = ({ product, colorTitle, sizeTitle }) => {
   const toggleIsFavorite = (documentId) => {
     const favoritesString = localStorage.getItem("favorites");
     const favoritesArr = JSON.parse(favoritesString);
-    favoritesArr.push(documentId);
-    localStorage.setItem("favorites", JSON.stringify(favoritesArr));
-    alert(`Item id: ${documentId}`);
+    let newFavoritesArr;
+    if (favoritesArr.includes(documentId)) {
+      setFavorite(false);
+      newFavoritesArr = favoritesArr.filter((item) => item != documentId);
+    } else {
+      setFavorite(true);
+      favoritesArr.push(documentId);
+      newFavoritesArr = favoritesArr;
+    }
+    localStorage.setItem("favorites", JSON.stringify(newFavoritesArr));
   };
+
   return (
     <section className="my-24">
       <div className="container sm:flex sm:flex-col sm:gap-5 md:flex lg:flex-row lg:gap-24">
@@ -174,6 +186,7 @@ const ProductDetails = ({ product, colorTitle, sizeTitle }) => {
             </button>
             <button
               onClick={() => toggleIsFavorite(product.documentId)}
+              style={{ background: favorite ? "red" : "" }}
               className="border w-[50px] rounded-md h-[50px] flex items-center justify-center"
             >
               <img src={heart} className="w-[30px] h-[30px]" />

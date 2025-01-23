@@ -6,6 +6,7 @@ import { Outlet, useParams } from "react-router-dom";
 import { getData } from "../hooks/useFetch";
 import Error from "../components/loading/error";
 import Loading from "../components/loading/loading";
+import ScrollToTop from "../hooks/scrollToTop";
 
 const ProductPage = () => {
   const { documentId } = useParams();
@@ -47,6 +48,8 @@ const ProductPage = () => {
 
   return (
     <>
+      <ScrollToTop />
+
       <ProductDetails
         product={product}
         colorTitle={"AVAILABLE COLORS"}

@@ -11,6 +11,7 @@ import Error from "../components/loading/error";
 import Loading from "../components/loading/loading";
 import { useTranslation } from "react-i18next";
 import FashionParadise from "../components/fashionParadise";
+import ScrollToTop from "../hooks/scrollToTop";
 
 const HomePage = () => {
   const { i18n } = useTranslation();
@@ -47,6 +48,7 @@ const HomePage = () => {
 
     return (
       <>
+        <ScrollToTop />
         <Hero heroes={heroes[0]} img={bodyImage} />
         <CardsSection features={features} />
 
